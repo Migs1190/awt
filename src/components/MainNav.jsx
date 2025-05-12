@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import { Link, useLocation } from 'react-router';
 
 const navItems = [
 	{ name: 'Home', path: '/' },
-	{ name: 'Timetables', path: '/timetables' },
+	{ name: 'Scheduler', path: '/scheduler' },
 	{ name: 'About', path: '/about' },
 ];
 
 const MainNav = () => {
-	const [active, setActive] = useState('Home');
+	const location = useLocation();
+
 	return (
 		<nav>
-			<div className='flex justify-around bg-slate-800 text-slate-400 outline outline-[6px] outline-slate-800/50 mx-24 rounded-lg'>
+			<div className='flex justify-around items-center bg-slate-800 text-slate-400 outline outline-[6px] outline-slate-800/50 mx-24 rounded-lg'>
 				{navItems.map((item, i) => (
 					<Link
 						to={item.path}
 						key={i}
 						className={`p-3 hover:text-slate-100 transition-colors ${
-							active === item.name ? 'text-slate-100' : ''
-						}`}
-						onClick={() => setActive(item.name)}>
+							location.pathname === item.path ? 'text-slate-100' : ''
+						}`}>
 						{item.name}
 					</Link>
 				))}
